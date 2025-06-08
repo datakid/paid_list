@@ -3,699 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LX Search p2.2</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>LX Search P2.2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500&family=Prata&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         :root {
-            --lx-gold: linear-gradient(135deg, #b08d57 0%, #c5a47e 25%, #d4b896 50%, #c5a47e 75%, #9a7c4a 100%);
+            --lx-gold: linear-gradient(135deg, #a8854e 0%, #c5a47e 25%, #d4b896 50%, #c5a47e 75%, #9f7944 100%);
             --lx-gold-solid: #b08d57;
             --lx-gold-light: #c5a47e;
             --lx-gold-dark: #9a7c4a;
             --lx-gold-text: linear-gradient(135deg, #e8d5b7 0%, #c5a47e 30%, #b08d57 70%, #9a7c4a 100%);
-            --lx-gold-glow: rgba(176, 141, 87, 0.4);
-            --lx-gold-glow-intense: rgba(197, 164, 126, 0.6);
-            --lx-shine-color-center: rgba(232, 213, 183, 0.35);
-            --lx-shine-color-edge: rgba(197, 164, 126, 0.15);
-            --lx-dark-bg: radial-gradient(ellipse at center, #0f0f0f 0%, #060606 100%);
-            --lx-element-bg: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
-            --lx-element-bg-hover: linear-gradient(145deg, #252525 0%, #151515 100%);
-            --lx-text-light: #f8f8f8;
-            --lx-text-dark: #1a1a1a;
-            --lx-text-placeholder: #888888;
-            --lx-reset-button-bg: linear-gradient(135deg, #383838 0%, #2a2a2a 100%);
-            --lx-reset-button-text: #d8d8d8;
-            --lx-reset-button-border: #606060;
+            --lx-gold-glow: rgba(176, 141, 87, 0.25);
+            --lx-gold-glow-intense: rgba(197, 164, 126, 0.4);
+            --lx-shine-color-center: rgba(232, 213, 183, 0.1);
+            --lx-shine-color-edge: rgba(197, 164, 126, 0.03);
+            --lx-dark-bg: radial-gradient(ellipse at center, #0a0a0a 0%, #030303 100%);
+            --lx-element-bg: linear-gradient(145deg, #161616 0%, #0a0a0a 100%);
+            --lx-element-bg-hover: linear-gradient(145deg, #1f1f1f 0%, #101010 100%);
+            --lx-text-light: #f0f0f0;
+            --lx-text-dark: #1c1c1c;
+            --lx-text-placeholder: #7c7c7c;
+            --lx-reset-button-bg: linear-gradient(135deg, #303030 0%, #222222 100%);
+            --lx-reset-button-text: #c0c0c0;
+            --lx-reset-button-border: #4f4f4f;
 
-            --font-display: 'Playfair Display', 'Cormorant Garamond', serif;
+            --font-logo: 'Cinzel', serif;
+            --font-display: 'Cormorant Garamond', serif;
             --font-body: 'Inter', sans-serif;
-            --border-radius-main: 28px;
-            --border-radius-elements: 60px;
-            --shadow-ultra: 0 25px 80px rgba(0,0,0, 0.8), 0 12px 40px rgba(176, 141, 87, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            --shadow-mega: 0 40px 120px rgba(0,0,0, 0.9), 0 20px 60px rgba(176, 141, 87, 0.25), inset 0 2px 0 rgba(255, 255, 255, 0.08);
-            --shadow-divine: 0 60px 180px rgba(0,0,0, 0.95), 0 30px 80px rgba(176, 141, 87, 0.35), inset 0 3px 0 rgba(255, 255, 255, 0.1);
+            --font-price: 'Prata', serif;
+            --border-radius-main: 22px;
+            --border-radius-elements: 28px;
+            --shadow-ultra: 0 15px 60px rgba(0,0,0, 0.6), 0 8px 30px rgba(176, 141, 87, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+            --shadow-mega: 0 25px 90px rgba(0,0,0, 0.7), 0 15px 50px rgba(176, 141, 87, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            --shadow-divine: 0 40px 130px rgba(0,0,0, 0.8), 0 20px 70px rgba(176, 141, 87, 0.25), inset 0 2px 0 rgba(255, 255, 255, 0.06);
         }
         
         @keyframes fadeInMajestic {
-            from { opacity: 0; transform: translateY(40px) scale(0.92); filter: blur(2px); }
+            from { opacity: 0; transform: translateY(35px) scale(0.96); filter: blur(4px); }
             to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
         }
         
         @keyframes pulseGoldBorderDivine {
-            0% { 
-                border: 3px solid var(--lx-gold-solid);
-                box-shadow: 
-                    inset 0 0 30px var(--lx-gold-glow), 
-                    0 0 25px var(--lx-gold-glow-intense), 
-                    0 0 50px rgba(176, 141, 87, 0.3),
-                    0 0 100px rgba(176, 141, 87, 0.1);
-            }
-            50% { 
-                border: 3px solid var(--lx-gold-light);
-                box-shadow: 
-                    inset 0 0 40px var(--lx-gold-glow-intense), 
-                    0 0 35px var(--lx-gold-glow-intense), 
-                    0 0 70px rgba(197, 164, 126, 0.4),
-                    0 0 140px rgba(197, 164, 126, 0.15);
-            }
-            100% { 
-                border: 3px solid var(--lx-gold-solid);
-                box-shadow: 
-                    inset 0 0 30px var(--lx-gold-glow), 
-                    0 0 25px var(--lx-gold-glow-intense), 
-                    0 0 50px rgba(176, 141, 87, 0.3),
-                    0 0 100px rgba(176, 141, 87, 0.1);
-            }
+            0% { border-color: var(--lx-gold-dark); box-shadow: inset 0 0 20px var(--lx-gold-glow), 0 0 15px var(--lx-gold-glow), 0 0 40px rgba(176, 141, 87, 0.15); }
+            50% { border-color: var(--lx-gold-light); box-shadow: inset 0 0 30px var(--lx-gold-glow-intense), 0 0 25px var(--lx-gold-glow-intense), 0 0 60px rgba(197, 164, 126, 0.25); }
+            100% { border-color: var(--lx-gold-dark); box-shadow: inset 0 0 20px var(--lx-gold-glow), 0 0 15px var(--lx-gold-glow), 0 0 40px rgba(176, 141, 87, 0.15); }
         }
 
         @keyframes shimmerMajestic {
-            0% { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translateX(320%) skewX(-12deg); opacity: 0; }
+            0% { transform: translateX(-150%) skewX(-15deg); opacity: 0; }
+            30% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateX(250%) skewX(-15deg); opacity: 0; }
         }
 
         @keyframes floatMajestic {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-6px) rotate(0.5deg); }
-            50% { transform: translateY(-12px) rotate(0deg); }
-            75% { transform: translateY(-6px) rotate(-0.5deg); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
         }
 
         @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.03); opacity: 1; }
         }
 
         body, html { 
-            margin: 0; 
-            padding: 0; 
-            font-family: var(--font-body); 
-            background: var(--lx-dark-bg); 
-            color: var(--lx-text-light); 
-            min-height: 100vh; 
-            overflow-x: hidden; 
-            font-size: 16px; 
-            line-height: 1.8; 
-            -webkit-font-smoothing: antialiased; 
-            -moz-osx-font-smoothing: grayscale;
-            position: relative;
+            margin: 0; padding: 0; font-family: var(--font-body); background: var(--lx-dark-bg); color: var(--lx-text-light); min-height: 100vh; overflow-x: hidden; font-size: 16px; line-height: 1.9; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; position: relative;
         }
 
         body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 15% 85%, rgba(176, 141, 87, 0.04) 0%, transparent 60%),
-                radial-gradient(circle at 85% 15%, rgba(197, 164, 126, 0.04) 0%, transparent 60%),
-                radial-gradient(circle at 50% 50%, rgba(154, 124, 74, 0.02) 0%, transparent 70%),
-                linear-gradient(135deg, rgba(176, 141, 87, 0.01) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 15% 85%, rgba(176, 141, 87, 0.02) 0%, transparent 50%), radial-gradient(circle at 85% 15%, rgba(197, 164, 126, 0.02) 0%, transparent 50%);
+            pointer-events: none; z-index: -1;
         }
 
         body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(176, 141, 87, 0.01) 2px,
-                    rgba(176, 141, 87, 0.01) 4px
-                );
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.3;
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(176, 141, 87, 0.01) 1px, rgba(176, 141, 87, 0.01) 3px);
+            pointer-events: none; z-index: -1; opacity: 0.15;
         }
 
-        .app-container { 
-            width: 100%; 
-            max-width: 1100px; 
-            margin: 0 auto; 
-            padding: 40px 25px; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            animation: fadeInMajestic 1.2s cubic-bezier(0.23, 1, 0.32, 1); 
-        }
-
-        .app-header { 
-            background: var(--lx-element-bg);
-            padding: 45px 40px; 
-            border-radius: var(--border-radius-main); 
-            margin-bottom: 35px; 
-            box-shadow: var(--shadow-ultra);
-            border: 2px solid rgba(176, 141, 87, 0.25);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(20px);
-        }
+        .app-container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 60px 25px; min-height: 100vh; display: flex; flex-direction: column; animation: fadeInMajestic 1.4s cubic-bezier(0.23, 1, 0.32, 1); }
+        .app-header { background: var(--lx-element-bg); padding: 40px; border-radius: var(--border-radius-main); margin-bottom: 40px; box-shadow: var(--shadow-mega); border: 1px solid rgba(176, 141, 87, 0.2); position: relative; overflow: hidden; backdrop-filter: blur(15px); }
 
         .app-header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -120%;
-            width: 120%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(232, 213, 183, 0.08) 30%, 
-                rgba(197, 164, 126, 0.12) 50%, 
-                rgba(232, 213, 183, 0.08) 70%, 
-                transparent
-            );
-            animation: shimmerMajestic 4s infinite;
+            content: ""; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(232, 213, 183, 0.03) 30%, rgba(197, 164, 126, 0.05) 50%, rgba(232, 213, 183, 0.03) 70%, transparent);
+            animation: shimmerMajestic 7s infinite 1.5s;
         }
 
         .app-header::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--lx-gold-light) 30%, 
-                var(--lx-gold-solid) 50%, 
-                var(--lx-gold-light) 70%, 
-                transparent
-            );
+            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--lx-gold-light) 30%, var(--lx-gold-solid) 50%, var(--lx-gold-light) 70%, transparent); opacity: 0.3;
         }
 
-        .header-top { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            margin-bottom: 35px; 
-            position: relative;
-            z-index: 1;
-        }
+        .header-top { display: flex; justify-content: center; align-items: center; margin-bottom: 35px; position: relative; z-index: 1; }
 
         .logo { 
-            font-family: var(--font-display); 
-            font-size: 3.5em; 
-            font-weight: 900; 
-            background: var(--lx-gold-text);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px; 
-            display: flex; 
-            align-items: center; 
-            text-shadow: 0 0 40px rgba(176, 141, 87, 0.4);
-            animation: floatMajestic 6s ease-in-out infinite;
-            position: relative;
+            font-family: var(--font-logo); font-size: 3.2em; font-weight: 500; background: var(--lx-gold-text); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: 5px; display: flex; align-items: center; text-shadow: 0 0 50px rgba(176, 141, 87, 0.3); animation: floatMajestic 10s ease-in-out infinite; position: relative; text-transform: uppercase;
         }
 
         .logo::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: radial-gradient(circle, rgba(176, 141, 87, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: breathe 4s ease-in-out infinite;
-            z-index: -1;
+            content: ""; position: absolute; top: -15px; left: -15px; right: -15px; bottom: -15px;
+            background: radial-gradient(circle, rgba(176, 141, 87, 0.07) 0%, transparent 65%); border-radius: 50%; animation: breathe 6s ease-in-out infinite; z-index: -1;
         }
 
-        .logo i.fa-gem { 
-            margin-right: 18px; 
-            font-size: 0.95em; 
-            color: var(--lx-gold-solid);
-            filter: drop-shadow(0 0 20px rgba(176, 141, 87, 0.6));
-            animation: floatMajestic 6s ease-in-out infinite reverse;
-        }
-
-        .search-wrapper { 
-            position: relative; 
-            width: 100%; 
-            max-width: 700px; 
-            margin: 0 auto 30px auto; 
-        }
-
-        .search-wrapper::before {
-            content: "";
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(135deg, 
-                rgba(176, 141, 87, 0.1), 
-                rgba(197, 164, 126, 0.1), 
-                rgba(176, 141, 87, 0.1)
-            );
-            border-radius: calc(var(--border-radius-elements) + 5px);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-        }
-
-        .search-wrapper:focus-within::before {
-            opacity: 1;
-        }
+        .logo i.fa-gem { margin-right: 22px; font-size: 0.8em; color: var(--lx-gold-solid); filter: drop-shadow(0 0 15px rgba(176, 141, 87, 0.5)); animation: floatMajestic 10s ease-in-out infinite reverse; }
+        .search-wrapper { position: relative; width: 100%; max-width: 700px; margin: 0 auto 30px auto; }
 
         #searchInput { 
-            width: 100%; 
-            padding: 22px 28px 22px 65px; 
-            font-size: 1.2em; 
-            font-family: var(--font-body); 
-            font-weight: 500;
-            border: 3px solid var(--lx-gold-solid);
-            border-radius: var(--border-radius-elements); 
-            background: var(--lx-element-bg);
-            color: var(--lx-text-light); 
-            outline: none; 
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); 
-            box-shadow: 
-                inset 0 0 25px rgba(176, 141, 87, 0.12),
-                0 15px 40px rgba(0,0,0,0.4),
-                0 0 0 1px rgba(176, 141, 87, 0.3);
-            position: relative;
-            z-index: 1;
-            backdrop-filter: blur(10px);
+            width: 100%; padding: 18px 28px 18px 60px; font-size: 1.15em; font-family: var(--font-body); font-weight: 400; border: 1px solid var(--lx-gold-dark); border-radius: var(--border-radius-elements); 
+            background: var(--lx-element-bg); color: var(--lx-text-light); outline: none; transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); 
+            box-shadow: inset 0 0 15px rgba(176, 141, 87, 0.08), 0 10px 30px rgba(0,0,0,0.5); position: relative; z-index: 1; backdrop-filter: blur(10px);
         }
 
-        #searchInput:focus { 
-            animation: pulseGoldBorderDivine 3s infinite ease-in-out;
-            background: var(--lx-element-bg-hover);
-            transform: scale(1.03);
-            font-weight: 600;
-        }
-
-        #searchInput::placeholder { 
-            color: var(--lx-text-placeholder); 
-            font-weight: 400; 
-            font-style: italic;
-            opacity: 0.8;
-        }
-
-        .search-icon { 
-            position: absolute; 
-            left: 24px; 
-            top: 50%; 
-            transform: translateY(-50%); 
-            color: var(--lx-text-placeholder); 
-            font-size: 1.4em; 
-            pointer-events: none; 
-            transition: all 0.5s ease; 
-            z-index: 2;
-        }
-
-        #searchInput:focus + .search-icon { 
-            color: var(--lx-gold-solid);
-            filter: drop-shadow(0 0 15px rgba(176, 141, 87, 0.8));
-            transform: translateY(-50%) scale(1.15) rotate(15deg);
-        }
-
-        .filter-area { 
-            display: flex; 
-            gap: 18px; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            position: relative;
-            z-index: 1;
-        }
+        #searchInput:focus { animation: pulseGoldBorderDivine 5s infinite ease-in-out; background: var(--lx-element-bg-hover); transform: scale(1.02); font-weight: 500; }
+        #searchInput::placeholder { color: var(--lx-text-placeholder); font-weight: 300; font-style: italic; opacity: 0.9; }
+        .search-icon { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); color: var(--lx-text-placeholder); font-size: 1.2em; pointer-events: none; transition: all 0.5s ease; z-index: 2; }
+        #searchInput:focus + .search-icon { color: var(--lx-gold-solid); filter: drop-shadow(0 0 10px rgba(176, 141, 87, 0.7)); transform: translateY(-50%) scale(1.1); }
+        .filter-area { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
 
         .filter-select, .filter-btn-reset { 
-            background: var(--lx-gold);
-            border: 2px solid var(--lx-gold-dark);
-            color: var(--lx-text-dark); 
-            padding: 15px 30px; 
-            border-radius: var(--border-radius-elements); 
-            cursor: pointer; 
-            font-size: 1em; 
-            font-weight: 700; 
-            font-family: var(--font-body); 
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); 
-            box-shadow: 
-                0 10px 30px rgba(0,0,0,0.4), 
-                0 0 25px rgba(176, 141, 87, 0.3),
-                inset 0 2px 0 rgba(255, 255, 255, 0.2),
-                inset 0 -2px 0 rgba(0, 0, 0, 0.1);
-            text-transform: uppercase; 
-            letter-spacing: 1.5px; 
-            display: flex; 
-            align-items: center; 
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
+            background: var(--lx-gold); border: 1px solid var(--lx-gold-dark); color: var(--lx-text-dark); padding: 10px 25px; border-radius: var(--border-radius-elements); cursor: pointer;
+            font-size: 0.9em; font-weight: 600; font-family: var(--font-body); transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3), 0 0 15px rgba(176, 141, 87, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.5px; display: flex; align-items: center; position: relative; overflow: hidden; backdrop-filter: blur(5px);
         }
 
         .filter-select::before, .filter-btn-reset::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -120%;
-            width: 120%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.2) 30%, 
-                rgba(255, 255, 255, 0.3) 50%, 
-                rgba(255, 255, 255, 0.2) 70%, 
-                transparent
-            );
+            content: ""; position: absolute; top: 0; left: -120%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15) 30%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 70%, transparent);
             transition: left 0.8s ease;
         }
 
-        .filter-select:hover::before, .filter-btn-reset:hover::before {
-            left: 120%;
-        }
-
-        .filter-select { 
-            appearance: none; 
-            -webkit-appearance: none; 
-            -moz-appearance: none; 
-            padding-right: 50px; 
-        }
-
-        .filter-select::after { 
-            content: '\f078'; 
-            font-family: 'Font Awesome 6 Free'; 
-            font-weight: 900; 
-            font-size: 0.9em; 
-            position: absolute;
-            right: 18px;
-            color: var(--lx-text-dark); 
-            transition: transform 0.4s ease; 
-            pointer-events: none;
-        }
-
-        .filter-select:focus::after { 
-            transform: rotate(180deg); 
-        }
-
-        .filter-select option { 
-            background: var(--lx-element-bg);
-            color: var(--lx-gold-solid); 
-            font-weight: 600; 
-            padding: 12px;
-            border-radius: 8px;
-        }
+        .filter-select:hover::before, .filter-btn-reset:hover::before { left: 120%; }
+        .filter-select { appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 45px; }
+        .filter-select::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 0.8em; position: absolute; right: 18px; color: var(--lx-text-dark); transition: transform 0.4s ease; pointer-events: none; }
+        .filter-select:focus::after { transform: rotate(180deg); }
+        .filter-select option { background: #2a2a2a; color: var(--lx-gold-light); font-weight: 500; padding: 12px; border-radius: 8px; }
 
         .filter-select:hover, .filter-btn-reset:hover { 
-            transform: translateY(-6px) scale(1.06); 
-            box-shadow: 
-                0 20px 50px rgba(0,0,0,0.5), 
-                0 0 40px rgba(176, 141, 87, 0.5),
-                inset 0 3px 0 rgba(255, 255, 255, 0.3),
-                inset 0 -3px 0 rgba(0, 0, 0, 0.15);
-            filter: brightness(1.15) saturate(1.3);
-            border-color: var(--lx-gold-light);
+            transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 30px rgba(176, 141, 87, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            filter: brightness(1.1) saturate(1.1); border-color: var(--lx-gold-light);
         }
 
-        .filter-btn-reset { 
-            background: var(--lx-reset-button-bg);
-            color: var(--lx-reset-button-text); 
-            border: 2px solid var(--lx-reset-button-border);
-        }
+        .filter-btn-reset { background: var(--lx-reset-button-bg); color: var(--lx-reset-button-text); border: 1px solid var(--lx-reset-button-border); }
+        .filter-btn-reset:hover { background: linear-gradient(135deg, #444444 0%, #333333 100%); color: var(--lx-text-light); border-color: #777777; }
+        .app-main { flex-grow: 1; position: relative; padding-top: 20px; }
 
-        .filter-btn-reset:hover { 
-            background: linear-gradient(135deg, #484848 0%, #3a3a3a 100%);
-            color: var(--lx-text-light); 
-            border-color: #808080;
-        }
-
-        .app-main { 
-            flex-grow: 1; 
-            position: relative; 
-            padding-top: 20px; 
-        }
-
-        .suggestions-area { 
-            margin: 0 auto 25px auto; 
-            max-width: calc(100% - 50px); 
-            width: fit-content; 
-            padding: 20px 30px; 
-            background: var(--lx-element-bg);
-            border-radius: 20px; 
-            border: 2px solid rgba(176, 141, 87, 0.3); 
-            font-size: 1.05em; 
-            color: var(--lx-text-placeholder); 
-            text-align: left; 
-            box-shadow: 
-                0 15px 40px rgba(0,0,0,0.5),
-                0 0 25px rgba(176, 141, 87, 0.15);
-            animation: fadeInMajestic 0.6s ease-out; 
-            position: relative;
-            overflow: hidden;
+        .suggestions-area {
+            margin: 0 auto 30px auto; max-width: calc(100% - 50px); width: fit-content; padding: 15px 25px; background: var(--lx-element-bg); border-radius: 14px;
+            border: 1px solid rgba(176, 141, 87, 0.2); font-size: 1.05em; color: var(--lx-text-placeholder); text-align: left; box-shadow: var(--shadow-ultra);
+            animation: fadeInMajestic 0.6s ease-out; position: relative; overflow: hidden;
         }
 
         .suggestions-area::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--lx-gold-light) 20%, 
-                var(--lx-gold-solid) 50%, 
-                var(--lx-gold-light) 80%, 
-                transparent
-            );
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--lx-gold-light) 20%, var(--lx-gold-solid) 50%, var(--lx-gold-light) 80%, transparent); opacity: 0.5;
         }
 
-        .suggestions-area:empty { 
-            display: none; 
-        }
-
-        .suggestions-area p { 
-            margin: 0; 
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 5px 10px;
-        }
-
-        .suggestions-area strong { 
-            font-weight: 600; 
-            color: var(--lx-text-light); 
-            margin-right: 5px;
-        }
-
+        .suggestions-area:empty { display: none; }
+        .suggestions-area p { margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 5px 10px; }
+        .suggestions-area strong { font-weight: 500; color: var(--lx-text-light); margin-right: 8px; font-style: italic; }
         .suggestions-area a { 
-            color: var(--lx-gold-solid);
-            text-decoration: none; 
-            font-weight: 600; 
-            padding: 4px 10px; 
-            border-radius: 8px; 
-            transition: all 0.4s ease; 
-            display: inline-block; 
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
+            color: var(--lx-gold-solid); text-decoration: none; font-weight: 500; padding: 3px 10px; border-radius: 6px; transition: all 0.4s ease;
+            display: inline-block; border: 1px solid transparent; position: relative; overflow: hidden; z-index: 1; font-family: var(--font-display);
         }
 
-        .suggestions-area a::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--lx-gold);
-            transition: left 0.4s ease;
-            z-index: -1;
+        .suggestions-area a::before { content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--lx-gold); transition: left 0.4s ease; z-index: -1; }
+        .suggestions-area a:hover::before { left: 0; }
+        .suggestions-area a:hover { color: var(--lx-text-dark); text-decoration: none; border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 4px 12px rgba(176, 141, 87, 0.3); }
+        .results-area { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 35px; }
+
+        .results-area .placeholder-text {
+            color: var(--lx-text-placeholder); text-align: center; font-size: 1.5em; margin-top: 80px; grid-column: 1 / -1;
+            font-weight: 400; font-style: italic; opacity: 0.6; font-family: var(--font-display);
         }
 
-        .suggestions-area a:hover::before {
-            left: 0;
-        }
-
-        .suggestions-area a:hover { 
-            color: var(--lx-text-dark); 
-            text-decoration: none;
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: scale(1.08);
-            box-shadow: 0 5px 15px rgba(176, 141, 87, 0.4);
-        }
-
-        .suggestions-area a:not(:last-child)::after { 
-            content: ","; 
-            color: var(--lx-text-placeholder); 
-            margin-left: 3px; 
-            text-decoration: none !important; 
-        }
-
-        .results-area { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-            gap: 30px; 
-        }
-
-        .results-area .placeholder-text { 
-            color: var(--lx-text-placeholder); 
-            text-align: center; 
-            font-size: 1.3em; 
-            margin-top: 100px; 
-            grid-column: 1 / -1; 
-            font-weight: 300; 
-            font-style: italic;
-            opacity: 0.6;
-            font-family: var(--font-display);
-        }
-
-        .result-item { 
-            background: var(--lx-element-bg);
-            border: 2px solid rgba(176, 141, 87, 0.3); 
-            border-radius: 22px; 
-            padding: 30px; 
-            box-shadow: var(--shadow-ultra);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
-            position: relative; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between;
-            backdrop-filter: blur(10px);
+        .result-item {
+            background: var(--lx-element-bg); border: 1px solid rgba(176, 141, 87, 0.2); border-radius: 16px; padding: 30px; box-shadow: var(--shadow-ultra);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); position: relative; overflow: hidden; display: flex; flex-direction: column; backdrop-filter: blur(10px);
         }
 
         .result-item::before { 
-            content: ""; 
-            position: absolute; 
-            top: -25%; 
-            left: -250%; 
-            width: 100%; 
-            height: 150%; 
-            background: linear-gradient( 
-                50deg, 
-                transparent 0%, 
-                var(--lx-shine-color-edge) 15%, 
-                var(--lx-shine-color-center) 50%, 
-                var(--lx-shine-color-edge) 85%, 
-                transparent 100% 
-            ); 
-            transform: skewX(-15deg) rotate(20deg); 
-            transition: left 1.5s cubic-bezier(0.165, 0.84, 0.44, 1); 
-            opacity: 0; 
-            z-index: 1; 
+            content: ""; position: absolute; top: -50%; left: -250%; width: 100%; height: 200%;
+            background: linear-gradient(50deg, transparent 0%, var(--lx-shine-color-edge) 20%, var(--lx-shine-color-center) 50%, var(--lx-shine-color-edge) 80%, transparent 100%);
+            transform: skewX(-15deg); transition: left 1.5s cubic-bezier(0.165, 0.84, 0.44, 1); opacity: 0; z-index: 1;
         }
 
-        .result-item::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(176, 141, 87, 0.08) 0%, 
-                transparent 40%, 
-                rgba(197, 164, 126, 0.05) 100%
-            );
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            z-index: 0;
-        }
+        .result-item::after { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(176, 141, 87, 0.05) 0%, transparent 50%); opacity: 0; transition: opacity 0.6s ease; z-index: 0; }
+        .result-item:hover::before { left: 150%; opacity: 0.7; transition-duration: 1.8s; }
+        .result-item:hover::after { opacity: 1; }
+        .result-item:hover { transform: translateY(-12px); box-shadow: var(--shadow-divine); border-color: var(--lx-gold-solid); background: var(--lx-element-bg-hover); }
+        .item-header { margin-bottom: 15px; z-index: 2; position: relative; flex-grow: 1; }
+        .item-name { font-family: var(--font-display); font-size: 1.9em; font-weight: 600; background: var(--lx-gold-text); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; line-height: 1.3; text-shadow: 0 0 20px rgba(176, 141, 87, 0.3); }
+        .item-details { font-size: 1em; color: var(--lx-text-placeholder); font-weight: 400; z-index: 2; position: relative; line-height: 1.8; }
+        .item-details strong { color: var(--lx-text-light); font-weight: 500; }
+        .item-details p { margin: 0 0 6px 0; }
+        .item-details .source-arabic { font-family: 'Arial', sans-serif; }
+        .item-price-wrapper { margin-top: 20px; text-align: right; z-index: 2; position: relative; }
 
-        .result-item:hover::before { 
-            left: 250%; 
-            opacity: 0.9; 
-            transition-duration: 1.8s; 
-        }
-
-        .result-item:hover::after {
-            opacity: 1;
-        }
-
-        .result-item:hover { 
-            transform: translateY(-15px) scale(1.03); 
-            box-shadow: var(--shadow-divine);
-            border-color: var(--lx-gold-solid);
-            background: var(--lx-element-bg-hover);
-        }
-
-        .item-header { 
-            margin-bottom: 18px; 
-            z-index: 2; 
-            position: relative; 
-        }
-
-        .item-name { 
-            font-family: var(--font-display); 
-            font-size: 1.6em; 
-            font-weight: 700; 
-            background: var(--lx-gold-text);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px; 
-            line-height: 1.3; 
-            z-index: 2; 
-            position: relative;
-            text-shadow: 0 0 25px rgba(176, 141, 87, 0.4);
-        }
-
-        .item-details { 
-            font-size: 1em; 
-            color: var(--lx-text-placeholder); 
-            margin-bottom: 10px; 
-            font-weight: 400; 
-            z-index: 2; 
-            position: relative;
-            line-height: 1.7;
-        }
-
-        .item-details strong { 
-            color: var(--lx-text-light); 
-            font-weight: 600; 
-        }
-
-        .item-details .price { 
-            font-weight: 700; 
-            background: var(--lx-gold-text);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 1.3em; 
-            text-shadow: 0 0 20px rgba(176, 141, 87, 0.5);
-        }
-
-        .item-details p { 
-            margin-bottom: 8px; 
-        }
-
-        .item-details .source-arabic { 
-            font-family: 'Arial', sans-serif; 
+        .price { 
+            font-family: var(--font-price); font-weight: 400; background: var(--lx-gold-text); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 2.2em; text-shadow: 0 0 25px rgba(176, 141, 87, 0.4); letter-spacing: 1px; display: inline-block;
         }
 
         @media (max-width: 768px) { 
-            .app-container { padding: 25px 18px; } 
-            .app-header { padding: 30px 25px; margin-bottom: 25px; } 
-            .header-top { margin-bottom: 25px; } 
+            .app-container { padding: 40px 20px; } 
+            .app-header { padding: 30px 25px; margin-bottom: 30px; } 
             .logo { font-size: 2.5em; } 
-            #searchInput { padding: 18px 25px 18px 55px; font-size: 1.1em;} 
+            #searchInput { padding: 18px 25px 18px 55px; font-size: 1.1em; } 
             .search-icon { left: 20px; font-size: 1.2em; } 
-            .filter-area { gap: 15px; } 
-            .filter-select, .filter-btn-reset { padding: 12px 25px; font-size: 0.9em; } 
-            .results-area { grid-template-columns: 1fr; gap: 25px;} 
-            .item-name { font-size: 1.4em; } 
+            .filter-area { gap: 12px; } 
+            .filter-select, .filter-btn-reset { padding: 10px 22px; font-size: 0.9em; } 
+            .results-area { grid-template-columns: 1fr; gap: 30px; } 
+            .item-name { font-size: 1.7em; } 
+            .price { font-size: 2em; }
         }
 
         @media (max-width: 480px) { 
-            .logo { font-size: 2.2em; } 
+            .logo { font-size: 2.1em; letter-spacing: 3px; } 
             .filter-select, .filter-btn-reset { width: 100%; text-align: left; justify-content: space-between; } 
             .filter-select { padding-right: 25px; } 
             .filter-select::after { right: 18px; } 
-            .item-name { font-size: 1.3em; } 
-            .item-details { font-size: 0.95em; } 
+            .item-name { font-size: 1.6em; } 
+            .item-details { font-size: 0.95em; }
+            .price { font-size: 1.9em; }
         }
     </style>
 </head>
@@ -704,11 +237,11 @@
         <header class="app-header">
             <div class="header-top">
                 <div class="logo">
-                    <i class="fas fa-gem"></i> LX Search p2.2
+                    <i class="fas fa-gem"></i> LX Search P2.2
                 </div>
             </div>
             <div class="search-wrapper">
-                 <input type="text" id="searchInput" placeholder="Search elite items...">
+                 <input type="text" id="searchInput" placeholder="Search the Élite Collection...">
                  <i class="fas fa-search search-icon"></i>
             </div>
             <div class="filter-area">
@@ -718,14 +251,14 @@
                 <select id="companyFilter" class="filter-select">
                     <option value="all">All Sources</option>
                 </select>
-                 <button id="resetFilters" class="filter-btn-reset">Reset Filters</button>
+                 <button id="resetFilters" class="filter-btn-reset">Reset</button>
             </div>
         </header>
 
         <main class="app-main">
             <div id="suggestionsArea" class="suggestions-area"></div>
             <div id="resultsArea" class="results-area">
-                <p class="placeholder-text">Start typing to explore the LX Paid collection...</p>
+                <p class="placeholder-text">Begin your search to unveil the collection...</p>
             </div>
         </main>
     </div>
@@ -765,103 +298,37 @@
                     break; 
                 }
             }
-
             return baseName + preservedSuffix;
         };
 
-        const processedItems = allMasterItemsRaw.map(item => ({
-            name: processItemName(item.name),
-            unit: item.unit, 
-            price: item.price,
-            sourceOriginal: item.company, 
-            sourceTranslated: translateCompanyToEnglish(item.company), 
-            status: "paid" 
-        }));
-        
+        const processedItems = allMasterItemsRaw.map(item => ({ name: processItemName(item.name), unit: item.unit, price: item.price, sourceOriginal: item.company, sourceTranslated: translateCompanyToEnglish(item.company), status: "paid" }));
         const paidItems = processedItems;
+        const nameIndex = new Map(); const companyIndex = new Map();
+        
+        paidItems.forEach(item => { nameIndex.set(item.name.toLowerCase(), item); const sourceKey = item.sourceTranslated || "Unknown Source"; if (!companyIndex.has(sourceKey)) companyIndex.set(sourceKey, new Set()); companyIndex.get(sourceKey).add(item); });
 
-        const nameIndex = new Map(); const companyIndex = new Map(); const termFrequency = new Map();
-        const bigramIndex = new Map(); const trigramIndex = new Map();
-        const soundexIndex = new Map(); const metaphoneIndex = new Map();
-
-        function getSoundex(str) { if (!str) return ""; str = str.toLowerCase(); const firstLetter = str.charAt(0); str = str.substring(1); str = str.replace(/[aeiouyhw]/g, ''); const s = firstLetter.toUpperCase() + str.replace(/bfpv/g, '1').replace(/cgjkqsxz/g, '2').replace(/dt/g, '3').replace(/l/g, '4').replace(/mn/g, '5').replace(/r/g, '6').replace(/(.)\1+/g, '$1'); return (s + "0000").substring(0, 4); }
-        function getMetaphone(word) { if (!word) return ""; word = word.toUpperCase(); let output = ""; let i = 0; if (word.startsWith("KN")||word.startsWith("GN")||word.startsWith("PN")||word.startsWith("AE")||word.startsWith("WR")) word = word.substring(1); if (word.startsWith("X")) word = "S" + word.substring(1); if (word.startsWith("WH")) word = "W" + word.substring(1); while (output.length < 4 && i < word.length) { let char = word[i]; let nextChar = word[i+1]||''; switch (char) { case 'B': if (!(i > 0 && word[i-1] === 'M' && !nextChar)) output += 'B'; break; case 'C': if (nextChar === 'IA' || nextChar === 'H') output += 'X'; else if (nextChar === 'I' || nextChar === 'E' || nextChar === 'Y') output += 'S'; else if (nextChar === 'K' || nextChar === 'G' || nextChar === 'Q') {} else output += 'K'; break; case 'D': output += (nextChar === 'G' && "EIY".includes(word[i+2]||'')) ? 'J' : 'T'; break; case 'G': if (nextChar === 'H' && !"AEIOU".includes(word[i+2]||'')) {} else if (nextChar === 'N' || (nextChar === 'E' && word[i+2] === 'D')) {} else if ("EIY".includes(nextChar) && !(word[i-1] === 'G')) output += 'J'; else output += 'K'; break; case 'H': if (i === 0 || "AEIOUCSPTG".includes(word[i-1])) output += 'H'; break; case 'K': if (i === 0 || word[i-1] !== 'C') output += 'K'; break; case 'P': output += (nextChar === 'H') ? 'F' : 'P'; break; case 'Q': output += 'K'; break; case 'S': output += (nextChar === 'H' || (nextChar === 'I' && (word[i+2] === 'O' || word[i+2] === 'A'))) ? 'X' : 'S'; break; case 'T': output += (nextChar === 'H' || (nextChar === 'I' && (word[i+2] === 'O' || word[i+2] === 'A'))) ? 'X' : '0'; break; case 'V': output += 'F'; break; case 'W': case 'Y': if ("AEIOU".includes(nextChar)) output += char; break; case 'X': output += 'KS'; break; case 'Z': output += 'S'; break; default: if ("AEIOU".includes(char)) { if (i === 0) output += char; } else { output += char; } break; } if (output.length > 1 && output[output.length -1] === output[output.length -2]) output = output.slice(0, -1); i++; } return output.substring(0, 4); }
-        function updateTermIndices(term, itemName) { term = term.replace(/[^\w\s]/gi, '').trim(); if(!term || term.length < 2) return; termFrequency.set(term, (termFrequency.get(term) || 0) + 1); for (let i = 0; i < term.length - 1; i++) { const bigram = term.slice(i, i + 2); if (!bigramIndex.has(bigram)) bigramIndex.set(bigram, new Set()); bigramIndex.get(bigram).add(itemName); } for (let i = 0; i < term.length - 2; i++) { const trigram = term.slice(i, i + 3); if (!trigramIndex.has(trigram)) trigramIndex.set(trigram, new Set()); trigramIndex.get(trigram).add(itemName); } const soundex = getSoundex(term); if (!soundexIndex.has(soundex)) soundexIndex.set(soundex, new Set()); soundexIndex.get(soundex).add(itemName); const metaphone = getMetaphone(term); if (!metaphoneIndex.has(metaphone)) metaphoneIndex.set(metaphone, new Set()); metaphoneIndex.get(metaphone).add(itemName); }
-
-        paidItems.forEach(item => {
-            const lowerName = item.name.toLowerCase();
-            nameIndex.set(lowerName, item); 
-            
-            let namePartForIndexing = item.name;
-            preserveSuffixes.forEach(suffix => { namePartForIndexing = namePartForIndexing.replace(suffix, ""); });
-            namePartForIndexing.trim().toLowerCase().split(/\s+/).filter(w => w.length > 1 && !/^\d+$/.test(w) && !/^\d+\/\d+$/.test(w) && !/^\d+-\d+$/.test(w)).forEach(word => updateTermIndices(word, item.name));
-            
-            const sourceKey = item.sourceTranslated || "Unknown Source"; 
-            if (!companyIndex.has(sourceKey)) companyIndex.set(sourceKey, new Set());
-            companyIndex.get(sourceKey).add(item);
-            sourceKey.toLowerCase().split(/\s+/).filter(w => w.length > 1).forEach(word => updateTermIndices(word, item.name));
-        });
-
-        function levenshteinDistance(a, b) { if (a.length === 0) return b.length; if (b.length === 0) return a.length; const matrix = Array(a.length + 1).fill(null).map(() => Array(b.length + 1).fill(null)); for (let i = 0; i <= a.length; i++) matrix[i][0] = i; for (let j = 0; j <= b.length; j++) matrix[0][j] = j; for (let i = 1; i <= a.length; i++) { for (let j = 1; j <= b.length; j++) { const cost = a[i - 1] === b[j - 1] ? 0 : 1; matrix[i][j] = Math.min(matrix[i-1][j]+1, matrix[i][j-1]+1, matrix[i-1][j-1]+cost); }} return matrix[a.length][b.length]; }
         function getJaroWinklerSimilarity(s1, s2) { let m = 0; const range = Math.floor(Math.max(s1.length, s2.length) / 2) - 1; const s1Matches = new Array(s1.length).fill(false); const s2Matches = new Array(s2.length).fill(false); for (let i=0; i<s1.length; i++) { const low=Math.max(0,i-range); const high=Math.min(i+range+1,s2.length); for (let j=low; j<high; j++) { if (!s2Matches[j] && s1[i]===s2[j]) {s1Matches[i]=true; s2Matches[j]=true; m++; break;}}} if (m===0) return 0; let k=0, t=0; for (let i=0; i<s1.length; i++) { if (s1Matches[i]) { while(!s2Matches[k]) k++; if (s1[i]!==s2[k]) t++; k++;}} const jaro = (m/s1.length + m/s2.length + (m-t/2)/m)/3; let p=0; const l=Math.min(4,Math.min(s1.length,s2.length)); for (let i=0; i<l; i++) { if (s1[i]===s2[i]) p++; else break;} return jaro + p * 0.1 * (1 - jaro); }
 
-        function findSimilarTerms(searchTerm, N = 5) {
-            if (!searchTerm || searchTerm.length < 2) return [];
-            const lowerSearchTerm = searchTerm.toLowerCase().replace(/[^\w\s]/gi, '');
-            if (!lowerSearchTerm) return [];
-
-            const searchSoundex = getSoundex(lowerSearchTerm);
-            const searchMetaphone = getMetaphone(lowerSearchTerm);
-            const potentialMatches = new Set();
-
-            const addItemToPotentials = (itemName) => { if (paidItems.some(pi => pi.name === itemName)) potentialMatches.add(itemName); };
-            if (soundexIndex.has(searchSoundex)) soundexIndex.get(searchSoundex).forEach(addItemToPotentials);
-            if (metaphoneIndex.has(searchMetaphone)) metaphoneIndex.get(searchMetaphone).forEach(addItemToPotentials);
-            for (let i = 0; i < lowerSearchTerm.length - 1; i++) { const bigram = lowerSearchTerm.slice(i, i + 2); if (bigramIndex.has(bigram)) bigramIndex.get(bigram).forEach(addItemToPotentials); }
-            for (let i = 0; i < lowerSearchTerm.length - 2; i++) { const trigram = lowerSearchTerm.slice(i, i + 3); if (trigramIndex.has(trigram)) trigramIndex.get(trigram).forEach(addItemToPotentials); }
-            paidItems.forEach(item => { 
-                let nameToCheck = item.name;
-                preserveSuffixes.forEach(suffix => { nameToCheck = nameToCheck.replace(suffix, ""); });
-                if (nameToCheck.trim().toLowerCase().includes(lowerSearchTerm)) potentialMatches.add(item.name); 
-            });
-
-            const scoredSuggestions = Array.from(potentialMatches)
-                .map(name => { 
-                    let nameForComparison = name;
-                    preserveSuffixes.forEach(suffix => { nameForComparison = nameForComparison.replace(suffix, ""); });
-                    const lowerName = nameForComparison.trim().toLowerCase().replace(/[^\w\s]/gi, '');
-                    if(!lowerName) return {name, score: -100, levenshtein: 100};
-                    const levenshtein = levenshteinDistance(lowerSearchTerm, lowerName); 
-                    const jaroWinkler = getJaroWinklerSimilarity(lowerSearchTerm, lowerName);
-                    let score = jaroWinkler * 12 - levenshtein * 1.8; 
-                    if (getSoundex(lowerName) === searchSoundex) score += 5; 
-                    if (getMetaphone(lowerName) === searchMetaphone) score += 5;
-                    if (nameIndex.has(name.toLowerCase())) score += 4;
-                    if (lowerName.startsWith(lowerSearchTerm)) score += 6;
-                    score -= Math.abs(lowerSearchTerm.length - lowerName.length) * 0.5;
-                    return { name, score, levenshtein };
-                })
-                .filter(s => s.score > 1.0 && s.levenshtein <= Math.max(4, Math.floor(lowerSearchTerm.length * 0.65)))
-                .sort((a, b) => b.score - a.score);
-            const uniqueNames = new Set(); const finalSuggestions = [];
-            for (const sug of scoredSuggestions) { 
-                if (sug.name.toLowerCase() !== searchTerm.toLowerCase() && !uniqueNames.has(sug.name) && finalSuggestions.length < N) { 
-                    finalSuggestions.push(sug.name); 
-                    uniqueNames.add(sug.name);
-                }
-            }
-            return finalSuggestions;
+        function findSimilarTerms(searchTerm, N = 3) {
+            const lowerSearchTerm = searchTerm.toLowerCase();
+            const scoredSuggestions = paidItems.map(item => {
+                const lowerName = item.name.toLowerCase();
+                const jaroWinkler = getJaroWinklerSimilarity(lowerSearchTerm, lowerName);
+                let score = jaroWinkler;
+                if (lowerName.startsWith(lowerSearchTerm)) score += 0.2;
+                return { name: item.name, score };
+            }).filter(s => s.score > 0.75 && s.name.toLowerCase() !== lowerSearchTerm)
+              .sort((a, b) => b.score - a.score);
+            return [...new Set(scoredSuggestions.map(s => s.name))].slice(0, N);
         }
-
-        function displaySuggestions(suggestedTerms) { suggestionsArea.innerHTML = ''; if (suggestedTerms.length > 0) { const p = document.createElement('p'); const strong = document.createElement('strong'); strong.textContent = 'Did you mean:'; p.appendChild(strong); suggestedTerms.forEach((term, index) => { const a = document.createElement('a'); a.href = '#'; a.textContent = term; a.addEventListener('click', (e) => { e.preventDefault(); searchInput.value = term; performSearchAndFilter(); }); p.appendChild(a); }); suggestionsArea.appendChild(p); } }
+        
+        function displaySuggestions(suggestedTerms) { suggestionsArea.innerHTML = ''; if (suggestedTerms.length > 0) { const p = document.createElement('p'); const strong = document.createElement('strong'); strong.textContent = 'Did you mean:'; p.appendChild(strong); suggestedTerms.forEach((term) => { const a = document.createElement('a'); a.href = '#'; a.textContent = term; a.addEventListener('click', (e) => { e.preventDefault(); searchInput.value = term; performSearchAndFilter(); }); p.appendChild(a); }); suggestionsArea.appendChild(p); } }
         
         function populateFilters() {
             const units = [...new Set(paidItems.map(item => item.unit || "N/A"))].sort((a,b) => a.localeCompare(b));
             const sourcesTranslated = [...new Set(paidItems.map(item => item.sourceTranslated || "Unknown Source"))].sort((a,b) => a.localeCompare(b));
-            
             unitFilterSelect.innerHTML = '<option value="all">All Units</option>';
             units.forEach(unit => { const option = document.createElement('option'); option.value = unit; option.textContent = unit; unitFilterSelect.appendChild(option);});
-            
             companyFilterSelect.innerHTML = '<option value="all">All Sources</option>';
             sourcesTranslated.forEach(source => { const option = document.createElement('option'); option.value = source; option.textContent = source; companyFilterSelect.appendChild(option);});
         }
@@ -874,17 +341,7 @@
 
             let filtered = paidItems.filter(item => {
                 const lowerName = item.name.toLowerCase();
-                const itemSourceOriginalLower = (item.sourceOriginal || "Unknown Source").toLowerCase();
-                const itemSourceTranslatedLower = (item.sourceTranslated || "Unknown Source").toLowerCase();
-
-                let matchesSearch = true;
-                if (searchTokens.length > 0) {
-                    matchesSearch = searchTokens.every(token => 
-                        lowerName.includes(token) || 
-                        itemSourceOriginalLower.includes(token) || 
-                        itemSourceTranslatedLower.includes(token)  
-                    );
-                }
+                const matchesSearch = searchTokens.length > 0 ? searchTokens.every(token => lowerName.includes(token)) : true;
                 const matchesUnit = (selectedUnit === 'all') || ((item.unit || "N/A") === selectedUnit);
                 const matchesSource = (selectedSourceTranslated === 'all') || ((item.sourceTranslated || "Unknown Source") === selectedSourceTranslated);
                 return matchesSearch && matchesUnit && matchesSource;
@@ -893,20 +350,13 @@
             if (searchTerm) {
                 filtered.sort((a,b) => {
                     const aName = a.name.toLowerCase(); const bName = b.name.toLowerCase();
-                    const aStarts = aName.startsWith(searchTerm); const bStarts = bName.startsWith(searchTerm);
-                    if (aStarts && !bStarts) return -1; if (!aStarts && bStarts) return 1;
                     const simA = getJaroWinklerSimilarity(searchTerm, aName); const simB = getJaroWinklerSimilarity(searchTerm, bName);
-                    if (simA > simB) return -1; if (simB > simA) return 1;
-                    return aName.localeCompare(bName);
+                    return simB - simA;
                 });
             }
             renderResults(filtered);
-            if (filtered.length === 0 && searchTerm.length >=2) { 
-                const suggestedTerms = findSimilarTerms(searchTerm);
-                displaySuggestions(suggestedTerms);
-            } else {
-                suggestionsArea.innerHTML = '';
-            }
+            if (filtered.length === 0 && searchTerm.length >=3) { displaySuggestions(findSimilarTerms(searchTerm)); } 
+            else { suggestionsArea.innerHTML = ''; }
         }
 
         function renderResults(itemsToRender) {
@@ -918,31 +368,32 @@
                  if (hasSearchTerm || hasActiveFilter) {
                     resultsArea.innerHTML = `<p class="placeholder-text">No items found matching your criteria.</p>`;
                 } else {
-                    resultsArea.innerHTML = `<p class="placeholder-text">Start typing to explore the LX Paid collection...</p>`;
+                    resultsArea.innerHTML = `<p class="placeholder-text">Begin your search to unveil the collection...</p>`;
                 }
                 return;
             }
             itemsToRender.forEach((item, index) => {
                 const itemEl = document.createElement('div');
                 itemEl.className = 'result-item';
-                itemEl.style.opacity = 0;
-                itemEl.style.animation = `fadeInMajestic 0.6s ease-out forwards ${index * 0.04}s`;
+                itemEl.style.animation = `fadeInMajestic 0.7s ease-out forwards ${index * 0.05}s`;
 
                 itemEl.innerHTML = `
                     <div class="item-header">
                         <h3 class="item-name">${item.name}</h3>
+                        <div class="item-details">
+                            <p><strong>Unit:</strong> ${item.unit || 'N/A'}</p>
+                            <p><strong>Source:</strong> <span class="source-arabic">${item.sourceOriginal || 'N/A'}</span></p>
+                        </div>
                     </div>
-                    <div class="item-details">
-                        <p><strong>Unit:</strong> ${item.unit || 'N/A'}</p>
-                        <p><strong>Source:</strong> <span class="source-arabic">${item.sourceOriginal || 'N/A'}</span></p>
-                        <p><strong>Price:</strong> <span class="price">${item.price ? item.price.toFixed(2) : 'N/A'}</span></p>
+                    <div class="item-price-wrapper">
+                        <span class="price">${item.price ? item.price.toFixed(2) : 'N/A'}</span>
                     </div>
                 `;
                 resultsArea.appendChild(itemEl);
             });
         }
 
-        searchInput.addEventListener('input', () => { clearTimeout(searchTimeout); searchTimeout = setTimeout(performSearchAndFilter, 250); });
+        searchInput.addEventListener('input', () => { clearTimeout(searchTimeout); searchTimeout = setTimeout(performSearchAndFilter, 300); });
         unitFilterSelect.addEventListener('change', performSearchAndFilter);
         companyFilterSelect.addEventListener('change', performSearchAndFilter);
         resetFiltersBtn.addEventListener('click', () => { 
@@ -950,7 +401,7 @@
             unitFilterSelect.value = 'all'; 
             companyFilterSelect.value = 'all'; 
             suggestionsArea.innerHTML = ''; 
-            resultsArea.innerHTML = '<p class="placeholder-text">Start typing to explore the LX Paid collection...</p>';
+            resultsArea.innerHTML = '<p class="placeholder-text">Begin your search to unveil the collection...</p>';
         });
 
         populateFilters();
