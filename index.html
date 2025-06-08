@@ -216,6 +216,8 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        window.scrollTo(0, 0);
+
         const searchInput = document.getElementById('searchInput');
         const unitFilterSelect = document.getElementById('unitFilter');
         const companyFilterSelect = document.getElementById('companyFilter');
@@ -291,7 +293,7 @@
                 return;
             }
 
-            const threshold = searchTerm.length < 5 ? 2 : 3;
+            const threshold = searchTerm.length < 6 ? 3 : 4;
             const suggestions = allItems
                 .map(item => ({
                     name: item.name,
@@ -300,7 +302,7 @@
                 .filter(item => item.dist > 0 && item.dist <= threshold)
                 .sort((a, b) => a.dist - b.dist);
 
-            const uniqueNames = [...new Set(suggestions.map(s => s.name))].slice(0, 3);
+            const uniqueNames = [...new Set(suggestions.map(s => s.name))].slice(0, 4);
 
             if (uniqueNames.length > 0) {
                 const suggestionsHTML = uniqueNames.map(name => `<a href="#">${name}</a>`).join('');
