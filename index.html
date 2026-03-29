@@ -98,7 +98,6 @@
             pointer-events: none; z-index: -1; opacity: 0.3; 
         }
 
-        /* --- SIZING ADJUSTMENT --- */
         .app-container { 
             width: 100%; max-width: 1300px; margin: 0 auto; padding: 50px 25px; min-height: 100vh; display: flex; flex-direction: column; 
             animation: fadeInLuxury 1.6s cubic-bezier(0.19, 1, 0.22, 1); 
@@ -399,6 +398,17 @@
             history.scrollRestoration = 'manual';
         }
 
+        const escapeHTML = (str) => {
+            if (str === null || str === undefined) return '';
+            return String(str).replace(/[&<>"']/g, match => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            })[match]);
+        };
+
         const searchInput = document.getElementById('searchInput');
         const unitFilterSelect = document.getElementById('unitFilter');
         const companyFilterSelect = document.getElementById('companyFilter');
@@ -472,11 +482,10 @@
             const bestMatches = suggestions.filter(item => item.distance <= threshold).slice(0, 5);
 
             if (bestMatches.length > 0) {
-                const suggestionsHTML = bestMatches.map(item => `<a href="#">${item.name}</a>`).join('');
+                const suggestionsHTML = bestMatches.map(item => `<a href="#">${escapeHTML(item.name)}</a>`).join('');
                 suggestionsArea.innerHTML = `<p><strong>Did you mean:</strong> ${suggestionsHTML}</p>`;
             }
         }
-
 
         function performSearchAndFilter() {
             suggestionsArea.innerHTML = ''; 
@@ -521,10 +530,10 @@
 
                 itemEl.innerHTML = `
                     <div class="item-header">
-                        <h3 class="item-name">${item.name}</h3>
+                        <h3 class="item-name">${escapeHTML(item.name)}</h3>
                         <div class="item-details">
-                            <p><strong>Unit:</strong> ${item.unit || 'N/A'}</p>
-                            <p><strong>Source:</strong> <span class="source-arabic">${item.sourceOriginal || 'N/A'}</span></p>
+                            <p><strong>Unit:</strong> ${escapeHTML(item.unit || 'N/A')}</p>
+                            <p><strong>Source:</strong> <span class="source-arabic">${escapeHTML(item.sourceOriginal || 'N/A')}</span></p>
                         </div>
                     </div>
                     <div class="item-price-wrapper">
